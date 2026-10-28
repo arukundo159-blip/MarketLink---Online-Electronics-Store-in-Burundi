@@ -28,3 +28,259 @@
   <script src="app.js"></script>
 </body>
 </html>
+<!-- MARKETLINK BURUNDI -->
+<section id="marketlink" style="
+  max-width:700px;
+  margin:20px auto;
+  padding:15px;
+  font-family:Arial,sans-serif;
+  color:#222;
+">
+
+  <div style="
+    background:#087443;
+    color:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+  ">
+    <h1>🇧🇮 MarketLink</h1>
+    <p>Isoko ry'Abarundi kuri Internet</p>
+    <p>Gura kandi ugurishe bitagoranye!</p>
+  </div>
+
+  <!-- KWANDIKISHA -->
+  <div style="padding:15px;background:#f2f5f3;margin-top:15px;border-radius:10px;">
+    <h2>👤 Iyandikishe</h2>
+
+    <form id="mlRegister">
+      <input id="mlName" placeholder="Amazina yawe"
+        required style="width:100%;padding:12px;box-sizing:border-box;margin:5px 0;">
+
+      <select id="mlCountry"
+        style="width:100%;padding:12px;margin:5px 0;">
+        <option value="+257">🇧🇮 Burundi (+257)</option>
+      </select>
+
+      <input id="mlPhone" type="tel"
+        placeholder="Inomero ya telefone"
+        required style="width:100%;padding:12px;box-sizing:border-box;margin:5px 0;">
+
+      <select id="mlRole"
+        style="width:100%;padding:12px;margin:5px 0;">
+        <option value="buyer">Ndi umuguzi</option>
+        <option value="seller">Ndi umudandaza</option>
+      </select>
+
+      <button type="submit" style="
+        width:100%;padding:13px;background:#087443;
+        color:white;border:0;border-radius:7px;margin-top:8px;">
+        Iyandikishe
+      </button>
+    </form>
+
+    <p id="mlRegisterMessage"></p>
+  </div>
+
+  <!-- KURONDERA IBICURUZWA -->
+  <div style="padding:15px;margin-top:15px;border:1px solid #ddd;border-radius:10px;">
+    <h2>🔎 Rondera ibicuruzwa</h2>
+
+    <input id="mlSearch" placeholder="Andika ico urondera..."
+      style="width:100%;padding:12px;box-sizing:border-box;">
+
+    <div id="mlProducts"></div>
+  </div>
+
+  <!-- GUSHIRAKO IGICURUZWA -->
+  <div style="padding:15px;background:#f2f5f3;margin-top:15px;border-radius:10px;">
+    <h2>🛍️ Gurisha igicuruzwa</h2>
+
+    <form id="mlProductForm">
+      <input id="mlProductName" placeholder="Izina ry'igicuruzwa"
+        required style="width:100%;padding:12px;box-sizing:border-box;margin:5px 0;">
+
+      <input id="mlPrice" type="number" min="1"
+        placeholder="Igiciro mu mafaranga FBu"
+        required style="width:100%;padding:12px;box-sizing:border-box;margin:5px 0;">
+
+      <input id="mlSellerPhone" type="tel"
+        placeholder="Telefone ya WhatsApp (+257...)"
+        required style="width:100%;padding:12px;box-sizing:border-box;margin:5px 0;">
+
+      <label for="mlPhoto">📷 Hitamwo ifoto y'igicuruzwa:</label>
+      <input id="mlPhoto" type="file" accept="image/*"
+        style="width:100%;padding:10px;box-sizing:border-box;margin:5px 0;">
+
+      <textarea id="mlDescription"
+        placeholder="Insiguro y'igicuruzwa"
+        style="width:100%;padding:12px;box-sizing:border-box;margin:5px 0;"></textarea>
+
+      <button type="submit" style="
+        width:100%;padding:13px;background:#087443;
+        color:white;border:0;border-radius:7px;margin-top:8px;">
+        Shira ku isoko
+      </button>
+    </form>
+
+    <p id="mlProductMessage"></p>
+  </div>
+
+</section>
+
+<script>
+(function () {
+  const products = [];
+
+  const registerForm = document.getElementById("mlRegister");
+  const productForm = document.getElementById("mlProductForm");
+  const productList = document.getElementById("mlProducts");
+  const searchInput = document.getElementById("mlSearch");
+
+  function cleanPhone(phone) {
+    return phone.replace(/[\s()-]/g, "");
+  }
+
+  function validBurundiPhone(phone) {
+    return /^\+257\d{8}$/.test(cleanPhone(phone));
+  }
+
+  registerForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("mlName").value.trim();
+    const phone = cleanPhone(document.getElementById("mlPhone").value);
+    const role = document.getElementById("mlRole").value;
+
+    if (!validBurundiPhone(phone)) {
+      document.getElementById("mlRegisterMessage").textContent =
+        "Andika inomero neza, nk'iyi: +257XXXXXXXX";
+      return;
+    }
+
+    document.getElementById("mlRegisterMessage").textContent =
+      "Murakoze " + name + "! Iyi ni demo yo kugerageza. " +
+      "Wahisemwo: " +
+      (role === "seller" ? "Umudandaza." : "Umuguzi.") +
+      " Konti yawe ntirabikwa burundu.";
+  });
+
+  productForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("mlProductName").value.trim();
+    const price = Number(document.getElementById("mlPrice").value);
+    const phone = cleanPhone(
+      document.getElementById("mlSellerPhone").value
+    );
+    const description =
+      document.getElementById("mlDescription").value.trim();
+    const photoFile = document.getElementById("mlPhoto").files[0];
+
+    if (!validBurundiPhone(phone)) {
+      document.getElementById("mlProductMessage").textContent =
+        "Telefone ya WhatsApp itegerezwa kuba imeze gutya: +257XXXXXXXX";
+      return;
+    }
+
+    if (!name || price <= 0) {
+      document.getElementById("mlProductMessage").textContent =
+        "Suzuma izina n'igiciro c'igicuruzwa.";
+      return;
+    }
+
+    function addProduct(photo) {
+      products.push({ name, price, phone, description, photo });
+      displayProducts();
+      productForm.reset();
+
+      document.getElementById("mlProductMessage").textContent =
+        "Igicuruzwa cashizwe ku rutonde rw'igerageza!";
+    }
+
+    if (photoFile) {
+      if (!photoFile.type.startsWith("image/")) {
+        document.getElementById("mlProductMessage").textContent =
+          "Hitamwo ifoto gusa.";
+        return;
+      }
+
+      if (photoFile.size > 2 * 1024 * 1024) {
+        document.getElementById("mlProductMessage").textContent =
+          "Hitamwo ifoto itarengeje 2 MB.";
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        addProduct(reader.result);
+      };
+      reader.readAsDataURL(photoFile);
+    } else {
+      addProduct("");
+    }
+  });
+
+  function displayProducts() {
+    const term = searchInput.value.toLowerCase().trim();
+    productList.replaceChildren();
+
+    const filtered = products.filter(function (product) {
+      return (
+        product.name.toLowerCase().includes(term) ||
+        product.description.toLowerCase().includes(term)
+      );
+    });
+
+    if (filtered.length === 0) {
+      const message = document.createElement("p");
+      message.textContent = products.length === 0
+        ? "Ibicuruzwa bizogaragara hano niwamara kubishirako."
+        : "Nta gicuruzwa gihuye n'ivyo urondera.";
+      productList.appendChild(message);
+      return;
+    }
+
+    filtered.forEach(function (product) {
+      const card = document.createElement("div");
+      card.style.cssText =
+        "padding:12px;margin-top:12px;border:1px solid #ddd;border-radius:8px;";
+
+      if (product.photo) {
+        const img = document.createElement("img");
+        img.src = product.photo;
+        img.alt = product.name;
+        img.style.cssText =
+          "width:100%;max-height:250px;object-fit:contain;";
+        card.appendChild(img);
+      }
+
+      const title = document.createElement("h3");
+      title.textContent = product.name;
+      card.appendChild(title);
+
+      const price = document.createElement("p");
+      price.textContent = product.price.toLocaleString("fr-FR") + " FBu";
+      card.appendChild(price);
+
+      const description = document.createElement("p");
+      description.textContent = product.description;
+      card.appendChild(description);
+
+      const contact = document.createElement("a");
+      contact.href = "https://wa.me/" + product.phone.replace(/\D/g, "");
+      contact.target = "_blank";
+      contact.rel = "noopener noreferrer";
+      contact.textContent = "Vugana n'umudandaza kuri WhatsApp";
+      contact.style.cssText =
+        "display:block;background:#087443;color:white;padding:12px;text-align:center;border-radius:7px;text-decoration:none;";
+      card.appendChild(contact);
+
+      productList.appendChild(card);
+    });
+  }
+
+  searchInput.addEventListener("input", displayProducts);
+  displayProducts();
+})();
+</script>
