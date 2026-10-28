@@ -283,4 +283,262 @@
   searchInput.addEventListener("input", displayProducts);
   displayProducts();
 })();
-</script>
+</script><style>
+/* MARKETLINK WHITE & BLUE DESIGN */
+#marketlink-store {
+  font-family: Arial, sans-serif;
+  color: #172b4d;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+#marketlink-store * {
+  box-sizing: border-box;
+}
+
+#marketlink-store .ml-header {
+  background: #123b70;
+  color: white;
+  padding: 18px 16px;
+}
+
+#marketlink-store .ml-brand {
+  font-size: 27px;
+  font-weight: 800;
+  margin-bottom: 13px;
+}
+
+#marketlink-store .ml-brand span {
+  color: #70c4ff;
+}
+
+#marketlink-store .ml-search {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#marketlink-store .ml-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px;
+  border: 0;
+  outline: none;
+  font-size: 16px;
+}
+
+#marketlink-store .ml-search button {
+  border: 0;
+  background: #1687e8;
+  color: white;
+  padding: 0 18px;
+  font-size: 18px;
+}
+
+#marketlink-store .ml-links {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 12px 16px;
+  background: #eaf5ff;
+  white-space: nowrap;
+}
+
+#marketlink-store .ml-links a {
+  color: #123b70;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#marketlink-store .ml-hero {
+  margin: 16px;
+  padding: 25px 20px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #dceeff, #f5faff);
+}
+
+#marketlink-store .ml-hero h1 {
+  font-size: 27px;
+  line-height: 1.2;
+  color: #123b70;
+  margin: 0 0 10px;
+}
+
+#marketlink-store .ml-hero p {
+  color: #405775;
+  line-height: 1.5;
+}
+
+#marketlink-store .ml-button {
+  display: inline-block;
+  background: #147de0;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#marketlink-store .ml-section-title {
+  padding: 0 16px;
+  margin: 25px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#marketlink-store .ml-section-title h2 {
+  margin: 0;
+  color: #123b70;
+  font-size: 21px;
+}
+
+#marketlink-store .ml-section-title a {
+  color: #147de0;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+#marketlink-store .ml-categories {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 0 16px 8px;
+}
+
+#marketlink-store .ml-category {
+  min-width: 95px;
+  text-align: center;
+  background: #f1f7fd;
+  border: 1px solid #e0ecf8;
+  border-radius: 10px;
+  padding: 14px 8px;
+  color: #123b70;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#marketlink-store .ml-category span {
+  display: block;
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+#marketlink-store .ml-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0 12px;
+}
+
+#marketlink-store .ml-product {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e3eaf2;
+  border-radius: 11px;
+  background: white;
+}
+
+#marketlink-store .ml-product img {
+  display: block;
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  background: #eef5fc;
+}
+
+#marketlink-store .ml-product-info {
+  padding: 11px;
+}
+
+#marketlink-store .ml-product h3 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 0 0 8px;
+  color: #18365c;
+}
+
+#marketlink-store .ml-price {
+  color: #1269bd;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+#marketlink-store .ml-view {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: #e8f3ff;
+  color: #0759a5;
+  border: 1px solid #cfe5fc;
+  border-radius: 6px;
+  padding: 9px 5px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+#marketlink-store .ml-footer {
+  margin-top: 28px;
+  background: #123b70;
+  color: white;
+  text-align: center;
+  padding: 24px 16px;
+  line-height: 1.7;
+}
+
+#marketlink-store .ml-footer strong {
+  color: #70c4ff;
+}
+
+@media (min-width: 700px) {
+  #marketlink-store .ml-header {
+    padding: 22px 5%;
+  }
+
+  #marketlink-store .ml-top {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+  }
+
+  #marketlink-store .ml-brand {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+
+  #marketlink-store .ml-search {
+    flex: 1;
+  }
+
+  #marketlink-store .ml-hero {
+    padding: 40px;
+  }
+
+  #marketlink-store .ml-products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    padding: 0 24px;
+  }
+
+  #marketlink-store .ml-product img {
+    height: 200px;
+  }
+
+  #marketlink-store .ml-section-title {
+    padding: 0 24px;
+  }
+
+  #marketlink-store .ml-categories {
+    padding-left: 24px;
+  }
+}
+</style>
+
